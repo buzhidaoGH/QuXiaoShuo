@@ -1,9 +1,9 @@
 module.exports = {
   configureWebpack: {
     resolve: {
-      // extensions:['.js', '*', '.css'],
+      // extensions:['.js', '*', '.css'],后缀省略别名
       alias: {
-        // '@':'src',
+        // '@':'src',内部配置过
         assets: '@/assets',
         common: '@/common',
         components: '@/components',
