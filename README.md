@@ -1,29 +1,11 @@
-# quxiaoshuo
+# QuXiaoShuo
++ **趣小说，面试项目开发，前端web，Vue框架**
++ 后台在:https://github.com/buzhidaoGH/QuXiaoShuo_B
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# 使用教程
+1. 项目创建
+`npm install`
+2. 项目运行
+`npm run serve`
+3. 项目打包
+`npm run build`
