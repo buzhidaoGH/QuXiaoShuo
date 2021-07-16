@@ -1,4 +1,8 @@
 module.exports = {
+  devServer: {
+    port: '80',
+  },
+
   configureWebpack: {
     resolve: {
       // extensions:['.js', '*', '.css'],后缀省略别名
