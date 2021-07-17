@@ -1,20 +1,18 @@
 <!-------- template -------->
 <template>
-  <div class="novel-ranking">
-    <div v-for="novel in novelRec" :key="novel.novelkey" class="block">
+  <div class="novelcategory">
+    <div v-for="novel in novelList" :key="novel.novelkey" class="block">
       <div class="block_img">
         <img
           @load="imageLoad"
           height="100"
           width="80"
           src="http://m.biquge.tv/style/noimg.jpg"
-          onerror="javascript:this.src='http://m.biquge.tv/style/noimg.jpg'"
-        />
+          onerror="javascript:this.src='http://m.biquge.tv/style/noimg.jpg'"        />
       </div>
       <div class="block_txt">
-        <h2>[{{ novel.category.substring(0, 2) }}]{{ novel.title }}</h2>
-        <p></p>
-        <p>作者：{{ novel.author }}</p>
+        <h2>{{ novel.title }}</h2>
+        <p>[{{ novel.category.substring(0, 2) }}] | {{ novel.author }}</p>
         <p>{{ novel.description | ellipsis }}</p>
       </div>
       <div style="clear: both;"></div>
@@ -24,28 +22,15 @@
 
 <!--------- script --------->
 <script>
+//钩子函数;filters:过滤器;watch:监听;props:父传子;不用data属性:容易污染;
 export default {
-  name: 'NovelRanking',
-  data() {
-    //数据
-    return {}
-  },
+  name: 'NovelCategory',
   props: {
-    novelRec: {
+    novelList: {
       type: Array,
       default: () => {
         return []
       },
-    },
-  },
-  filters: {
-    ellipsis(value) {
-      if (!value) return '暂无简介'
-      value = value.replace(/<br\/>/g, '')
-      if (value.length > 30) {
-        return value.slice(0, 30) + '...'
-      }
-      return value
     },
   },
   methods: {
@@ -53,6 +38,16 @@ export default {
       //事件总线$bus,反射事件
       this.$bus.$emit('novelImageLoad')
       // console.log("图片加载完成");
+    },
+  },
+  filters: {
+    ellipsis(value) {
+      if (!value) return '暂无简介'
+      value = value.replace(/<br\/>/g, '')
+      if (value.length > 20) {
+        return value.slice(0, 30) + '...'
+      }
+      return value
     },
   },
 }
@@ -66,9 +61,8 @@ export default {
   justify-content: space-around;
 }
 .block {
-  text-indent: 10px;
   // background-color: #f1f3f4;
-  width: 300px;
+  width: 100%;
 }
 .block_img {
   height: auto;
@@ -79,37 +73,18 @@ export default {
   float: left;
   margin: 0 auto;
 }
-.block_img2 {
-  height: auto;
-  border: 1px solid #dedede;
-  overflow: hidden;
-  padding-top: 10px;
-  padding-bottom: 5px;
-  padding-right: 10px;
-  float: left;
-}
 .block_txt {
   border: 0px;
   height: 100px;
-  overflow: hidden;
   line-height: 20px;
   padding-top: 8px;
 }
-.block_txt2 {
-  border: 0px;
-  height: 120px;
-  overflow: hidden;
-  line-height: 20px;
-}
-
-.block_txt h2,
-.block_txt2 h2 {
-  font-size: 16px;
-  height: auto;
-}
-.block_txt p,
-.block_txt2 p {
-  height: auto;
+.block_txt h2 {
   font-size: 14px;
+  height: auto;
+}
+.block_txt p {
+  height: auto;
+  font-size: 12px;
 }
 </style>

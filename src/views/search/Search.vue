@@ -1,32 +1,26 @@
 <!-------- template -------->
 <template>
-  <div class="profile">
-    <img src="~assets/img/profile.jpg" alt="">
+  <div class="search">
+    Search
   </div>
 </template>
 
 <!--------- script --------->
 <script>
+//钩子函数;watch:监听;props:父传子;不用data属性:容易污染;
 export default {
-  name: 'Profile',
+  name: 'Search',
+  components: {//组件
+  },
   data() {//数据
     return {}
   },
   methods: {//方法
-  },
-  components: {//组件
-  },
-  computed: {//计算属性
   },
 }
 </script>
 
 <!--------- style --------->
 <style lang="less" scoped>
-.profile{
-  img{
-    height: calc(100vh - 10px);
-    width: 100vw;
-  }
-}
+  
 </style>

@@ -1,16 +1,21 @@
 <!-------- template -------->
 <template>
   <div class="novel-ranking">
-    <ul>
-      <li v-for="novel in novelList" :key="novel.novelkey" class="block">
-        <img :src="novel.image" height="100" width="80" />
+    <div v-for="novel in novelList" :key="novel.novelkey" class="block">
+      <router-link :to="'/novelInfo/'+novel.novelkey">
+        <img
+          onerror="javascript:this.src='http://m.biquge.tv/style/noimg.jpg'"
+          :src="novel.image"
+          height="100"
+          width="80"
+        />
         <div class="block-right">
           <p>[{{ novel.category.substring(0, 2) }}]</p>
           <p>{{ novel.title }}</p>
           <p>作者：{{ novel.author }}</p>
         </div>
-      </li>
-    </ul>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -42,23 +47,29 @@ export default {
 <!--------- style --------->
 <style lang="less" scoped>
 .novel-ranking {
-  ul {
-    list-style: none; //去掉标签默认的左边符号
-    li {
-      list-style-type: none; //去掉标签默认的左边符号
-    }
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   .block {
-    width: 45%;
+    width: 44%;
+    height: 100px;
     float: left;
     margin-bottom: 5px;
     margin-top: 5px;
     margin-left: 15px;
-    img{
+    img {
       float: left;
     }
     font-size: 14px;
     font-family: '宋体';
+    .block-right {
+      float: left;
+      height: 100px;
+      width: 45%;
+      p {
+        line-height: 18px;
+      }
+    }
   }
 }
 </style>

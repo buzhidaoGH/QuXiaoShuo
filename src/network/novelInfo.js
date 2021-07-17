@@ -1,21 +1,13 @@
 import { request } from './request'
 
-export function getDetail(iid) {
+export function getNovelInfo(novelkey) {
   return request({
-    url: '/detail',
-    params: {
-      iid,
-    },
+    url: '/book/'+novelkey,
   })
 }
 
-export function getRecommend(){
-  return request({
-    url:'recommend'
-  })
-}
 
-export class Goods {
+/* export class Goods {
   constructor(itemInfo, columns, services) {
     this.title = itemInfo.title
     this.desc = itemInfo.desc
@@ -47,4 +39,4 @@ export class GoodsParam {
     this.infos = info.set
     this.sizes = rule.tables
   }
-}
+} */
