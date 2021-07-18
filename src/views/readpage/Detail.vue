@@ -12,6 +12,11 @@
           @click="$router.go(-1)"
         />
       </div>
+      <div slot="center">
+        <span style="text-align: center;">
+          {{ novelInfo.title }}
+        </span>
+      </div>
       <div slot="right">
         <div style="font-size: 12px;" @click="inputBookrack">加入书架</div>
       </div>
@@ -38,14 +43,16 @@
         </div>
       </div>
       <div class="novel-chapter">
-        &nbsp;&nbsp;&nbsp;&nbsp;章节名<span>序号</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;章节名
+        <span>序号</span>
         <div
           class="chapter-one"
-          v-for="(chapter,index) in chapterInfo"
+          v-for="(chapter, index) in chapterInfo"
           :key="chapter.weight"
           @click="readpage(novelInfo.novelkey, chapter.weight)"
         >
-          &nbsp;&nbsp;&nbsp;&nbsp;{{ chapter.title }}<span>{{index+1}}</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;{{ chapter.title | chapterTitle }}
+          <span>{{ index + 1 }}</span>
         </div>
       </div>
     </scroll>
@@ -75,6 +82,14 @@ export default {
   filters: {
     ellipsis(value) {
       if (!value) return '暂无简介'
+      value = value.replace(/<br\/>/g, '')
+      return value
+    },
+    chapterTitle(value) {
+      if (!value) return '无题'
+      if (value.length > 15) {
+        return value.slice(0, 15) + '...'
+      }
       return value
     },
   },
@@ -100,7 +115,10 @@ export default {
       bookrackList.push(this.novelInfo.novelkey)
       let unqueBookrackList = Array.from(new Set(bookrackList))
       localStorage.setItem('bookrackList', JSON.stringify(unqueBookrackList))
-      localStorage.setItem(this.novelInfo.novelkey, JSON.stringify(this.novelInfo))
+      localStorage.setItem(
+        this.novelInfo.novelkey,
+        JSON.stringify(this.novelInfo),
+      )
     },
   },
   created() {

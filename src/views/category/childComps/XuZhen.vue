@@ -24,7 +24,7 @@ export default {
 
 <!--------- style --------->
 <style lang="less" scoped>
-  .xuanhuan{
+  .xuzhen{
     height: 100%;
   }
 </style>

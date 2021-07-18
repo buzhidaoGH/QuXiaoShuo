@@ -24,7 +24,7 @@ export default {
 
 <!--------- style --------->
 <style lang="less" scoped>
-  .xuanhuan{
+  .dushi{
     height: 100%;
   }
 </style>

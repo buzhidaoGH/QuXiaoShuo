@@ -86,7 +86,6 @@
 <!--------- script --------->
 <script>
 import BScroll from 'better-scroll'
-import BScroll from 'better-scroll'
 import NavBar from 'components/common/navbar/NavBar'
 export default {
   name: 'Search',
@@ -110,7 +109,7 @@ export default {
       // 上拉加载
       pullUpLoad: {
         // 当上拉距离超过30px时触发 pullingUp 事件
-        threshold: -30,//默认是0px
+        threshold: -30, //默认是0px
       },
       // 下拉刷新
       pullDownRefresh: {
@@ -152,10 +151,5 @@ export default {
     background-color: red;
     overflow: hidden;
   }
-  // .content {
-  //   height: 150px;
-  //   // overflow: hidden;
-  //   overflow-y: scroll;
-  // }
 }
 </style>

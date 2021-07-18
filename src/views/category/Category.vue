@@ -5,7 +5,7 @@
     <nav-bar>
       <div slot="center">分类</div>
       <div slot="right">
-        <router-link to="search">
+        <router-link to="/search">
           <img
             src="~assets/img/search.svg"
             style="margin-top: 5px; margin-right: 10px;"
@@ -25,9 +25,7 @@
         ></tab-controller>
       </div>
       <div class="category-content">
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
+        <router-view></router-view>
       </div>
     </div>
   </div>
