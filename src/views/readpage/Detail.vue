@@ -13,7 +13,7 @@
         />
       </div>
       <div slot="right">
-        <div style="font-size: 12px;">加入书架</div>
+        <div style="font-size: 12px;" @click="inputBookrack">加入书架</div>
       </div>
     </nav-bar>
     <scroll :pullUpLoad="true" class="wrapper">
@@ -33,18 +33,19 @@
           <p>作者：{{ novelInfo.author }}</p>
           <p>类型：{{ novelInfo.category }}</p>
           <p>章节数：{{ novelInfo.chapters }}</p>
-          <p>最新更新：{{novelInfo.update}}</p>
-          <p>{{ novelInfo.description | ellipsis}}</p>
+          <p>最新更新：{{ novelInfo.update }}</p>
+          <p>{{ novelInfo.description | ellipsis }}</p>
         </div>
       </div>
       <div class="novel-chapter">
+        &nbsp;&nbsp;&nbsp;&nbsp;章节名<span>序号</span>
         <div
           class="chapter-one"
-          v-for="chapter in chapterInfo"
+          v-for="(chapter,index) in chapterInfo"
           :key="chapter.weight"
           @click="readpage(novelInfo.novelkey, chapter.weight)"
         >
-          {{ chapter.title }}
+          &nbsp;&nbsp;&nbsp;&nbsp;{{ chapter.title }}<span>{{index+1}}</span>
         </div>
       </div>
     </scroll>
@@ -90,6 +91,17 @@ export default {
       })
       // this.$router.push(`/readChapter/${novelkey}/${weight}`)
     },
+    inputBookrack() {
+      if (localStorage.getItem('bookrackList') == null) {
+        let num = []
+        localStorage.setItem('bookrackList', JSON.stringify(num))
+      }
+      let bookrackList = JSON.parse(localStorage.getItem('bookrackList'))
+      bookrackList.push(this.novelInfo.novelkey)
+      let unqueBookrackList = Array.from(new Set(bookrackList))
+      localStorage.setItem('bookrackList', JSON.stringify(unqueBookrackList))
+      localStorage.setItem(this.novelInfo.novelkey, JSON.stringify(this.novelInfo))
+    },
   },
   created() {
     console.log('发送网络')
@@ -128,7 +140,11 @@ export default {
       }
     }
     .novel-chapter {
-      text-align: center;
+      span {
+        float: right;
+        width: 60px;
+        text-align: center;
+      }
       .chapter-one {
         line-height: 30px;
         height: 30px;
