@@ -5,7 +5,7 @@
       <router-link :to="'/novelInfo/'+novel.novelkey">
         <img
           onerror="javascript:this.src='http://m.biquge.tv/style/noimg.jpg'"
-          :src="novel.image"
+          :src="novel.image.replace('http://www.biquge.tv/','https://www.qbiqu.com/')"
           height="100"
           width="80"
         />

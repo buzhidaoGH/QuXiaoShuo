@@ -2,21 +2,23 @@
 <template>
   <div class="novel-ranking">
     <div v-for="novel in novelRec" :key="novel.novelkey" class="block">
-      <div class="block_img">
-        <img
-          @load="imageLoad"
-          height="100"
-          width="80"
-          src="http://m.biquge.tv/style/noimg.jpg"
-          onerror="javascript:this.src='http://m.biquge.tv/style/noimg.jpg'"
-        />
-      </div>
-      <div class="block_txt">
-        <h2>[{{ novel.category.substring(0, 2) }}]{{ novel.title }}</h2>
-        <p></p>
-        <p>作者：{{ novel.author }}</p>
-        <p>{{ novel.description | ellipsis }}</p>
-      </div>
+      <router-link :to="'/novelInfo/' + novel.novelkey">
+        <div class="block_img">
+          <img
+            @load="imageLoad"
+            height="100"
+            width="80"
+            src="http://m.biquge.tv/style/noimg.jpg"
+            onerror="javascript:this.src='http://m.biquge.tv/style/noimg.jpg'"
+          />
+        </div>
+        <div class="block_txt">
+          <h2>[{{ novel.category.substring(0, 2) }}]{{ novel.title }}</h2>
+          <p></p>
+          <p>作者：{{ novel.author }}</p>
+          <p>{{ novel.description | ellipsis }}</p>
+        </div>
+      </router-link>
       <div style="clear: both;"></div>
     </div>
   </div>

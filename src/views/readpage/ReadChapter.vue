@@ -13,15 +13,20 @@
         />
       </div>
       <div slot="center">
-        章节名
+        {{ chapter.title }}
       </div>
     </nav-bar>
-    <scroll class="wrapper">
-      章节内容
-      {{ this.$route.params.novelkey }}
-      {{ this.$route.params.weight }}
-      {{ this.$route.query.novelkey }}
-      {{ this.$route.query.weight }}
+    <scroll :pullUpLoad="true" class="wrapper">
+      <!-- {{ chapter.content }} -->
+      <div class="chapter-content">
+        <p
+          v-for="(content, index) in chapter.contents"
+          v-show="index != 0"
+          :key="index"
+        >
+          {{ content }}
+        </p>
+      </div>
     </scroll>
   </div>
 </template>
@@ -31,6 +36,7 @@
 //钩子函数;filters:过滤器;watch:监听;props:父传子;不用data属性:容易污染;
 import NavBar from 'components/common/navbar/NavBar'
 import Scroll from 'components/content/Scroll'
+import { getChapterInfo } from '@/network/novelInfo.js'
 export default {
   name: 'ReadChapter',
   components: {
@@ -40,10 +46,27 @@ export default {
   },
   data() {
     //数据
-    return {}
+    return {
+      chapter: {
+        title: '',
+        contents: [],
+      },
+    }
   },
-  methods: {
-    //方法
+  /*   filters:{
+    contentFile(value) {
+      console.log('替换');
+      value = value.replace(/\s\s\s\s+/g,"<br/>")
+      return value
+    },
+  }, */
+  created() {
+    getChapterInfo(this.$route.query.novel, this.$route.query.weight).then(
+      (res) => {
+        this.chapter.title = res.chapterInfo.title
+        this.chapter.contents = res.chapterInfo.content.split(/\s\s\s\s+/g)
+      },
+    )
   },
 }
 </script>
@@ -58,6 +81,14 @@ export default {
   .wrapper {
     height: calc(100vh - 44px);
     overflow: hidden;
+    .chapter-content {
+      font-size: 18px;
+      font-weight: 550;
+      p {
+        text-indent: 2em;
+        padding-top: 10px;
+      }
+    }
   }
 }
 </style>

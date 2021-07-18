@@ -6,6 +6,12 @@ export function getNovelInfo(novelkey) {
   })
 }
 
+export function getChapterInfo(novelkey,weight) {
+  return request({
+    url: '/book/'+novelkey+'/'+weight,
+  })
+}
+
 
 /* export class Goods {
   constructor(itemInfo, columns, services) {

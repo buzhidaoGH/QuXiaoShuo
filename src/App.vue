@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- 不销毁 -->
-    <keep-alive exclude="Detail">
+    <keep-alive exclude="Detail,ReadChapter">
       <!-- 路由展示 -->
       <router-view></router-view>
     </keep-alive>

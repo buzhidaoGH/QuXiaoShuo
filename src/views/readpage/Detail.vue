@@ -12,27 +12,29 @@
           @click="$router.go(-1)"
         />
       </div>
-      <div slot="center">
-        <input type="text" />
-      </div>
       <div slot="right">
-        <img
-          src="~assets/img/search.svg"
-          style="margin-top: 5px; margin-right: 10px;"
-          width="35px"
-          height="35px"
-        />
+        <div style="font-size: 12px;">加入书架</div>
       </div>
     </nav-bar>
-    <scroll class="wrapper">
+    <scroll :pullUpLoad="true" class="wrapper">
       <div class="novel">
-        <img width="160px" height="200px" :src="novelInfo.image" />
+        <img
+          width="160px"
+          height="200px"
+          :src="
+            novelInfo.image.replace(
+              'http://www.biquge.tv/',
+              'https://www.qbiqu.com/',
+            )
+          "
+        />
         <div class="novel-right">
           <p>书名：{{ novelInfo.title }}</p>
           <p>作者：{{ novelInfo.author }}</p>
           <p>类型：{{ novelInfo.category }}</p>
-          <p>章节数：{{ novelInfo.chapters }}章</p>
-          <p>{{ novelInfo.description }}</p>
+          <p>章节数：{{ novelInfo.chapters }}</p>
+          <p>最新更新：{{novelInfo.update}}</p>
+          <p>{{ novelInfo.description | ellipsis}}</p>
         </div>
       </div>
       <div class="novel-chapter">
@@ -46,7 +48,6 @@
         </div>
       </div>
     </scroll>
-    <p>加入书架</p>
   </div>
 </template>
 
@@ -70,6 +71,12 @@ export default {
       chapterInfo: [],
     }
   },
+  filters: {
+    ellipsis(value) {
+      if (!value) return '暂无简介'
+      return value
+    },
+  },
   methods: {
     //方法
     readpage(novel, weight) {
@@ -85,10 +92,19 @@ export default {
     },
   },
   created() {
+    console.log('发送网络')
     getNovelInfo(this.$route.params.novelkey).then((res) => {
       this.novelInfo = res.novelInfo
       this.chapterInfo = res.chapterInfo
     })
+  },
+  computed: {
+    realImg() {
+      return this.novelInfo.image.replace(
+        'http://www.biquge.tv/',
+        'https://www.qbiqu.com/',
+      )
+    },
   },
 }
 </script>
@@ -101,7 +117,7 @@ export default {
   z-index: 9;
   background-color: #fff;
   .wrapper {
-    height: calc(100vh - 44px - 49px);
+    height: calc(100vh - 44px);
     overflow: hidden;
     .novel {
       overflow: hidden;

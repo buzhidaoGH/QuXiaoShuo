@@ -76,13 +76,13 @@ const routes = [
   {
     path: '/novelInfo/:novelkey',
     name: 'Detail',
-    component:() => import('@/views/readpage/Detail.vue'),
+    component: () => import('@/views/readpage/Detail.vue'),
   },
   {
     path: '/readChapter',
     name: 'Readchapter',
-    component:() => import('@/views/readpage/ReadChapter.vue'),
-  }
+    component: () => import('@/views/readpage/ReadChapter.vue'),
+  },
 ]
 
 const router = new VueRouter({
