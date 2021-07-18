@@ -38,7 +38,8 @@
           <p>作者：{{ novelInfo.author }}</p>
           <p>类型：{{ novelInfo.category }}</p>
           <p>章节数：{{ novelInfo.chapters }}</p>
-          <p>最新更新：{{ novelInfo.update }}</p>
+          <p>最近更新</p>
+          <p>{{ novelInfo.update | updateFilter }}</p>
           <p>{{ novelInfo.description | ellipsis }}</p>
         </div>
       </div>
@@ -91,6 +92,11 @@ export default {
         return value.slice(0, 15) + '...'
       }
       return value
+    },
+    updateFilter(date) {
+      date = date.split('.')[0]
+      date = date.replace('T', ' ')
+      return date
     },
   },
   methods: {
