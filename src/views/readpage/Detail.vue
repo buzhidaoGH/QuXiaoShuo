@@ -172,6 +172,7 @@ export default {
       .chapter-one {
         line-height: 30px;
         height: 30px;
+        border-bottom: 1px solid #EFEFEF;
       }
     }
   }

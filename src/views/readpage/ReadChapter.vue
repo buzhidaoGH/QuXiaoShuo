@@ -88,6 +88,7 @@ export default {
         text-indent: 2em;
         padding-top: 10px;
       }
+      background-color: #FBF6EC;
     }
   }
 }
